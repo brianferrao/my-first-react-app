@@ -1,12 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import CommentDetails from './CommentDetails';
+import faker from 'faker';
+
 
 const App = () => {
     return (
-        <div>
-            <label for="name" className="label">Enter Name: </label>
-            <input type="text" id="name"/>
-            <button style={{ backgroundColor: 'blue', color: 'white'}}>Submit</button>
+        <div className="ui comments">
+            <CommentDetails 
+                author="Brian" 
+                avatar={faker.image.avatar()} 
+                postedOn="Today at 4:00PM"
+                comment="Awesome Post!!" />
+            <CommentDetails 
+                author="Veva" 
+                avatar={faker.image.avatar()} 
+                postedOn="Today at 2:00PM"
+                comment="Awesome Post Again!!" />
+            <CommentDetails 
+                author="Leannah" 
+                avatar={faker.image.avatar()} 
+                postedOn="Today at 1:00AM"
+                comment="Awesome Post ??!!" />
         </div>
     );
 };
