@@ -1,19 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Seasons from './Seasons';
+import Spinner from './Spinner';
 
 class App extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = { lat: null,  errorMessage: ''};
-
+    state = { lat: null,  errorMessage: ''};
+    componentDidMount() {
         window.navigator.geolocation.getCurrentPosition(
             (position) => this.setState({lat: position.coords.latitude}),
             (err) => this.setState({errorMessage: err.message})
         );
     }
 
-    render() {
+    renderContent() {
         if(this.state.errorMessage && !this.state.lat) {
             return (
                 <div>Error: {this.state.errorMessage}</div>
@@ -22,12 +21,15 @@ class App extends React.Component {
 
         if(!this.state.errorMessage && this.state.lat) {
             return (
-                <div>Latitude: {this.state.lat}</div>
+                <Seasons lat={this.state.lat}></Seasons>
                 );
         }
 
-        return <div>Loading!!</div>;
-        
+        return <Spinner message="Please select location sharing"></Spinner>;
+    }
+
+    render() {        
+        return this.renderContent();
     }
 }
 
